@@ -33,7 +33,7 @@ post_router.get('/post', async (req: Request, res: Response) => {
         $gte: startOfDay,
         $lte: endOfDay,
       },
-    }).sort({ createdAt: -1 });
+    }).sort({ createdAt: -1, up: -1 });
 
     res.status(200).send(posts);
   } catch (error) {
