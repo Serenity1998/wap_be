@@ -13,12 +13,13 @@ const app = express();
 const port = process.env.PORT || 8080;
 
 const corsOptions = {
-  origin: 'https://final-project-serenity1998.vercel.app',
-  optionsSuccessStatus: 200,
+  origin: true, // Or use your origin 'https://desolate-reaches-15214.herokuapp.com' explicitly here, whichever works xD
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true,
 };
 
-app.use(cors({ origin: /\.vercel\.app$/ }));
-// app.use(cors(corsOptions));
+// app.use(cors({ origin: /\.vercel\.app$/ }));
+app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use('/api', user_router);
 app.use('/api', post_router);
