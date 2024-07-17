@@ -12,7 +12,7 @@ const post_api_1 = __importDefault(require("./rest/post_api"));
 var cors = require('cors');
 dotenv_1.default.config();
 const app = (0, express_1.default)();
-const port = 3001;
+const port = process.env.APP_PORT || 5000;
 const corsOptions = {
     origin: 'http://localhost:3000', // your frontend's origin
     credentials: true, // allow credentials
