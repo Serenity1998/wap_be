@@ -13,7 +13,7 @@ const app = express();
 const port = process.env.PORT || 8080;
 
 const corsOptions = {
-  origin: 'http://localhost:3000', // your frontend's origin
+  origin: 'https://final-project-serenity1998-n72zlckif-tumes-projects-4e8b03e6.vercel.app/', // your frontend's origin
   credentials: true, // allow credentials
 };
 
