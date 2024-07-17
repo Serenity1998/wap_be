@@ -17,7 +17,8 @@ const corsOptions = {
   optionsSuccessStatus: 200,
 };
 
-app.use(cors(corsOptions));
+app.use(cors({ origin: /\.herokuapp\.com$/ }));
+// app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use('/api', user_router);
 app.use('/api', post_router);
