@@ -16,16 +16,17 @@ post_router.post('/post', async (req: Request, res: Response) => {
 
 post_router.get('/post', async (req: Request, res: Response) => {
   try {
-    console.log(req.query.type);
-    const startOfDay = new Date();
-    if (req.query.type == 'yesterday') startOfDay.setDate(startOfDay.getDate() - 1);
-    startOfDay.setHours(0, 0, 0, 0);
+    const now = new Date();
+    const startOfDay = new Date(now);
+    const endOfDay = new Date(now);
 
-    const endOfDay = new Date();
-    if (req.query.type == 'yesterday') endOfDay.setDate(endOfDay.getDate() - 2);
-    startOfDay.setHours(0, 0, 0, 0);
+    if (req.query.type === 'yesterday') {
+      startOfDay.setUTCDate(startOfDay.getUTCDate() - 1);
+      endOfDay.setUTCDate(endOfDay.getUTCDate() - 1);
+    }
 
-    endOfDay.setHours(23, 59, 59, 999);
+    startOfDay.setUTCHours(0, 0, 0, 0);
+    endOfDay.setUTCHours(23, 59, 59, 999);
 
     const posts: IPost[] = await Post.find({
       createdAt: {
@@ -33,6 +34,7 @@ post_router.get('/post', async (req: Request, res: Response) => {
         $lte: endOfDay,
       },
     }).sort({ createdAt: -1 });
+
     res.status(200).send(posts);
   } catch (error) {
     res.status(500).send(error);
