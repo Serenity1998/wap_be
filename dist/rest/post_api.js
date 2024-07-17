@@ -19,16 +19,15 @@ post_router.post('/post', async (req, res) => {
 });
 post_router.get('/post', async (req, res) => {
     try {
-        console.log(req.query.type);
-        const startOfDay = new Date();
-        if (req.query.type == 'yesterday')
-            startOfDay.setDate(startOfDay.getDate() - 1);
-        startOfDay.setHours(0, 0, 0, 0);
-        const endOfDay = new Date();
-        if (req.query.type == 'yesterday')
-            endOfDay.setDate(endOfDay.getDate() - 2);
-        startOfDay.setHours(0, 0, 0, 0);
-        endOfDay.setHours(23, 59, 59, 999);
+        const now = new Date();
+        const startOfDay = new Date(now);
+        const endOfDay = new Date(now);
+        if (req.query.type === 'yesterday') {
+            startOfDay.setUTCDate(startOfDay.getUTCDate() - 1);
+            endOfDay.setUTCDate(endOfDay.getUTCDate() - 1);
+        }
+        startOfDay.setUTCHours(0, 0, 0, 0);
+        endOfDay.setUTCHours(23, 59, 59, 999);
         const posts = await IPost_1.default.find({
             createdAt: {
                 $gte: startOfDay,

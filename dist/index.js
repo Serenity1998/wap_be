@@ -14,8 +14,8 @@ dotenv_1.default.config();
 const app = (0, express_1.default)();
 const port = process.env.PORT || 8080;
 const corsOptions = {
-    origin: 'http://localhost:3000', // your frontend's origin
-    credentials: true, // allow credentials
+    origin: 'https://final-project-serenity1998.vercel.app',
+    optionsSuccessStatus: 200,
 };
 app.use(cors(corsOptions));
 app.use(body_parser_1.default.json());
