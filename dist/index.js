@@ -17,7 +17,7 @@ const corsOptions = {
     origin: 'https://final-project-serenity1998.vercel.app',
     optionsSuccessStatus: 200,
 };
-app.use(cors({ origin: /\.herokuapp\.com$/ }));
+app.use(cors({ origin: /\.vercel\.app$/ }));
 // app.use(cors(corsOptions));
 app.use(body_parser_1.default.json());
 app.use('/api', user_api_1.default);
